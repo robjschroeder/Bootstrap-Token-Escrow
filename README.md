@@ -2,7 +2,8 @@
 Need picture here
 
 This script will provide a user interface for escrowing a Bootstrap Token. This is helpful if a computer is already enrolled into an MDM but the bootstrap token is not escrowed within Jamf Pro. The script uses swiftDialog to present the dialog to the user: [https://github.com/bartreardon/swiftDialog](https://github.com/bartreardon/swiftDialog)
-Need screenshot here
+![Screenshot 2023-02-06 at 9 54 53 AM](https://user-images.githubusercontent.com/23343243/217034573-0187782c-4717-47e1-b209-24d2f445361d.png)
+
 
 ## Why build this
 I started working with Bart's swiftDialog tool recently and saw the opportunity for this when I noticed several computers in my environment without Bootstrap Tokens escrowed into Jamf Pro. I used the same framework as my FileVault PRK Reissue script, but am now applying a workflow to escrow the bootstrap token.
