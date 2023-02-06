@@ -1,5 +1,5 @@
 # Bootstrap Token Escrow
-Need picture here
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/robjschroeder/Bootstrap-Token-Escrow?display_name=tag)
 
 This script will provide a user interface for escrowing a Bootstrap Token. This is helpful if a computer is already enrolled into an MDM but the bootstrap token is not escrowed within Jamf Pro. The script uses swiftDialog to present the dialog to the user: [https://github.com/bartreardon/swiftDialog](https://github.com/bartreardon/swiftDialog)
 ![Screenshot 2023-02-06 at 9 54 53 AM](https://user-images.githubusercontent.com/23343243/217034573-0187782c-4717-47e1-b209-24d2f445361d.png)
