@@ -1,23 +1,23 @@
 #!/bin/bash
 
 # This script uses swiftDialog to present the end-user
-# a prompt for their password in effort to reissue a 
-# FileVault recovery key. The key is then escrowed to
+# a prompt for their password in effort to escrow a 
+# bootstrap token. The token is then escrowed to
 # Jamf Pro. This script calls for a Jamf recon, so no need
 # to add it as a maintenance payload on your policy. 
 #
-# Downloads and installs swiftDialog if it doesn't already
-# exist on the computer.
+# The script downloads and installs swiftDialog if
+# it doesn't already exist on the computer.
 #
 # Created 02.06.2023 @robjschroeder
-# Script Version: 1.0.0
-# Last Modified: 02.06.2023
+# Script Version: 1.0.1
+# Last Modified: 02.06.2025
 
 ##################################################
 # Variables -- edit as needed
 
 # Script Version
-scriptVersion="1.0.0"
+scriptVersion="1.0.1"
 # Banner image for message
 banner="${4:-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRgKEFxRXAMU_VCzaaGvHKkckwfjmgGncVjA&usqp=CAU"}"
 # More Information Button shown in message
@@ -98,7 +98,7 @@ dialogSuccess="$dialogApp \
 # Validate swiftDialog is installed
 if [ ! -e "/Library/Application Support/Dialog/Dialog.app" ]; then
 	echo "Dialog not found, installing..."
-	dialogURL=$(curl --silent --fail "https://api.github.com/repos/bartreardon/swiftDialog/releases/latest" | awk -F '"' "/browser_download_url/ && /pkg\"/ { print \$4; exit }")
+	dialogURL=$(curl --silent --fail "https://api.github.com/repos/swiftDialog/swiftDialog/releases/latest" | awk -F '"' "/browser_download_url/ && /pkg\"/ { print \$4; exit }")
 	expectedDialogTeamID="PWA5E9TQ59"
 	# Create a temp directory
 	workDir=$(/usr/bin/basename "$0")
@@ -149,7 +149,7 @@ maxTry=2
 
 ## Check to see if the bootstrap token is already escrowed
 tokenCheck=$(profiles status -type bootstraptoken)
-statusCheck=$(echo "${encryptCheck}" | grep "profiles: Bootstrap Token supported on server: YES
+statusCheck=$(echo "${tokenCheck}" | grep "profiles: Bootstrap Token supported on server: YES
 profiles: Bootstrap Token escrowed to server: YES")
 expectedStatus="profiles: Bootstrap Token supported on server: YES
 profiles: Bootstrap Token escrowed to server: NO"
@@ -195,7 +195,7 @@ expect eof
 
 # Check to ensure token was escrowed
 tokenCheck=$(profiles status -type bootstraptoken)
-statusCheck=$(echo "${encryptCheck}" | grep "profiles: Bootstrap Token supported on server: YES
+statusCheck=$(echo "${tokenCheck}" | grep "profiles: Bootstrap Token supported on server: YES
 profiles: Bootstrap Token escrowed to server: YES")
 expectedStatus="profiles: Bootstrap Token supported on server: YES
 profiles: Bootstrap Token escrowed to server: YES"
